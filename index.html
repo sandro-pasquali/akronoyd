@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Akronoyd</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<style type="text/css">
+		#stdout {
+			font-size: 30px;
+			font-family: helvetica;
+		}
+	</style>
+	<script>
+		
+		$(function() {
+			$("#exec").click(function() {
+				$.get("/char/" + $("#stdin").val(), function(data) {
+					if(!!!data) {
+						return;
+					}
+					
+					var $stdout = $("#stdout");
+					$stdout.empty();
+					$.each(data, function(idx, word) {
+						$stdout.append("<b>" + word.charAt(0).toUpperCase() + "</b>" + word.substring(1) + "<br />");
+					});
+				});
+			});
+		});
+	
+	</script>
+</head>
+<body>
+
+<input id="stdin" type="text" /><button id="exec">AKRONOYD</button>
+<div id="stdout"></div>
+</body>
+</html>
